@@ -1,10 +1,10 @@
 import React from 'react';
-import { LogOutBtnStyled } from './LogOutBtn.styled';
+import SecondaryBtn from '../SecondaryBtn';
 
 type LogOutBtnProps = {};
 
 function LogOutBtn({}: LogOutBtnProps) {
-  return <LogOutBtnStyled>Log out</LogOutBtnStyled>;
+  return <SecondaryBtn text="Log out" />;
 }
 
 export default LogOutBtn;

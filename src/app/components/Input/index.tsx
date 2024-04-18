@@ -13,7 +13,7 @@ import Image from 'next/image';
 type InputStatusProps = 'empty' | 'correct' | 'error';
 
 type Props = {
-  type: string;
+  type: 'text' | 'number' | 'password';
   name: string;
   label: string;
   value: string;
@@ -21,7 +21,7 @@ type Props = {
   onBlur(event: React.FocusEvent<HTMLInputElement>): void;
   error: boolean | undefined;
   helperText?: string | false | undefined;
-  required: boolean;
+  required?: boolean;
   sx?: React.CSSProperties;
   touched?: boolean;
   autoFocus?: boolean;

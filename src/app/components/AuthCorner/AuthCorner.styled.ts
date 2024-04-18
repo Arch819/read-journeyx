@@ -46,3 +46,9 @@ export const AuthNameStyled = styled.p`
     display: inline-flex;
   }
 `;
+
+export const BurgerBtnStyled = styled.button`
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+`;

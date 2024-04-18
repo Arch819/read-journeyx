@@ -8,20 +8,23 @@ import {
   NavigationStyle,
 } from './Navigation.styled';
 
-type NavigationProps = {};
+type NavigationProps = {
+  onClose?: () => void;
+};
 
-export default function Navigation({}: NavigationProps) {
+export default function Navigation({ onClose }: NavigationProps) {
   const currentPath = usePathname();
 
   console.dir(currentPath);
 
   return (
-    <NavigationStyle>
+    <NavigationStyle className="nav">
       <NavListStyled>
         <li>
           <NavLinkStyled
             href="/recommended"
             className={currentPath === '/recommended' ? 'active' : undefined}
+            onClick={onClose}
           >
             Home
           </NavLinkStyled>
@@ -30,6 +33,7 @@ export default function Navigation({}: NavigationProps) {
           <NavLinkStyled
             href="/library"
             className={currentPath === '/library' ? 'active' : undefined}
+            onClick={onClose}
           >
             My library
           </NavLinkStyled>

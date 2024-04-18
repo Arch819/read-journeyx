@@ -3,20 +3,20 @@
 import React from 'react';
 import getFirstLetter from '@/utils/getFirstLetter';
 import LogOutBtn from '../LogOutBtn';
-import { useSelector } from 'react-redux';
-import { selectIsMobile } from '@/redux/appState/appStateSelectors';
-import MobileMenu from '../MobileMenu';
+import sprite from '@/img/sprite.svg';
+
 import {
   AuthAvatarStyled,
   AuthCornerBoxStyled,
   AuthInfoStyled,
   AuthNameStyled,
+  BurgerBtnStyled,
 } from './AuthCorner.styled';
 
-type AuthCornerProps = {};
+type AuthCornerProps = { onOpen(): void };
 
-export default function AuthCorner({}: AuthCornerProps) {
-  const isMobile = false;
+export default function AuthCorner({ onOpen }: AuthCornerProps) {
+  const isMobile = true;
   const name = 'Lara';
   return (
     <AuthCornerBoxStyled>
@@ -26,7 +26,15 @@ export default function AuthCorner({}: AuthCornerProps) {
         </AuthAvatarStyled>
         <AuthNameStyled>{name}</AuthNameStyled>
       </AuthInfoStyled>
-      {isMobile ? <MobileMenu /> : <LogOutBtn />}
+      {isMobile ? (
+        <BurgerBtnStyled className="btn" onClick={onOpen}>
+          <svg width={28} height={28} fill="#f9f9f9">
+            <use href={`${sprite}#icon`}></use>
+          </svg>
+        </BurgerBtnStyled>
+      ) : (
+        <LogOutBtn />
+      )}
     </AuthCornerBoxStyled>
   );
 }

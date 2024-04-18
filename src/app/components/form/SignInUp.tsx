@@ -11,7 +11,7 @@ import {
   FormTitleStyled,
   InputBoxStyled,
   FormActionBoxStyled,
-} from './SignInUp.styled';
+} from './Forms.styled';
 
 interface FormValues {
   name: string;

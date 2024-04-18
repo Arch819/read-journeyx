@@ -16,6 +16,7 @@ export const LabelStyled = styled.label`
   border-radius: 12px;
   background-color: #262626;
   border: 1px solid transparent;
+  white-space: nowrap;
 
   &:is(:hover, :focus),
   &:focus-within {

@@ -10,7 +10,7 @@ export default function Home() {
   // const dispatch = useDispatch();
   const router = useRouter();
 
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   useEffect(() => {
     if (isLoggedIn) {

@@ -15,6 +15,7 @@ export const NavigationStyle = styled.nav`
 export const NavListStyled = styled.ul`
   display: flex;
   flex-direction: column;
+  align-items: start;
   gap: 20px;
   @media screen and (min-width: 768px) {
     flex-direction: row;
