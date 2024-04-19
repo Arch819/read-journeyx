@@ -15,8 +15,6 @@ type NavigationProps = {
 export default function Navigation({ onClose }: NavigationProps) {
   const currentPath = usePathname();
 
-  console.dir(currentPath);
-
   return (
     <NavigationStyle className="nav">
       <NavListStyled>

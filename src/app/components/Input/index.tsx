@@ -7,24 +7,23 @@ import {
   StatusIconBoxStyled,
   StatusIconStyled,
 } from './Input.styled';
-import sprite from '../../../img/sprite.svg';
-import Image from 'next/image';
 
 type InputStatusProps = 'empty' | 'correct' | 'error';
 
 type Props = {
-  type: 'text' | 'number' | 'password';
+  type: 'text' | 'number' | 'password' | 'email';
   name: string;
-  label: string;
-  value: string;
+  value: string | undefined;
   onChange(event: React.ChangeEvent<HTMLInputElement>): void;
-  onBlur(event: React.FocusEvent<HTMLInputElement>): void;
-  error: boolean | undefined;
+  label?: string;
+  onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
+  error?: boolean | undefined;
   helperText?: string | false | undefined;
   required?: boolean;
   sx?: React.CSSProperties;
   touched?: boolean;
   autoFocus?: boolean;
+  isSubmitted?: boolean;
 };
 
 export default function Input(props: Props) {
@@ -38,7 +37,10 @@ export default function Input(props: Props) {
     if (!props.error && props.value && props.touched) {
       setInputStatus('correct');
     }
-  }, [props.error, props.touched, props.value]);
+    if (props.isSubmitted) {
+      setInputStatus('empty');
+    }
+  }, [props.error, props.isSubmitted, props.touched, props.value]);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -64,12 +66,12 @@ export default function Input(props: Props) {
         <StatusIconBoxStyled>
           {inputStatus === 'error' && (
             <StatusIconStyled width={18} height={18} className="error">
-              <use href={`${sprite}#icon-error`}></use>
+              <use href="/sprite.svg#icon-error"></use>
             </StatusIconStyled>
           )}
           {inputStatus === 'correct' && (
             <StatusIconStyled width={18} height={18} className="correct">
-              <use href={`${sprite}#icon-error`}></use>
+              <use href="/sprite.svg#icon-correct"></use>
             </StatusIconStyled>
           )}
           {props.type === 'password' && (
@@ -82,11 +84,11 @@ export default function Input(props: Props) {
             >
               {showPassword ? (
                 <StatusIconStyled>
-                  <use href={`${sprite}#icon-eye-off`}></use>
+                  <use href="/sprite.svg#icon-eye-off"></use>
                 </StatusIconStyled>
               ) : (
                 <StatusIconStyled>
-                  <use href={`${sprite}#icon-eye`}></use>
+                  <use href="/sprite.svg#icon-eye"></use>
                 </StatusIconStyled>
               )}
             </button>

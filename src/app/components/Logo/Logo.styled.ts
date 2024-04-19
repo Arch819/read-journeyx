@@ -5,6 +5,9 @@ type LogoLinkProps = {
 };
 
 export const LogoLinkStyled = styled.a<LogoLinkProps>`
+  display: flex;
+  align-items: center;
+  gap: 4px;
   .logo-text {
     display: none;
   }

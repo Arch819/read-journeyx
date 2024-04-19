@@ -3,7 +3,6 @@
 import React from 'react';
 import getFirstLetter from '@/utils/getFirstLetter';
 import LogOutBtn from '../LogOutBtn';
-import sprite from '@/img/sprite.svg';
 
 import {
   AuthAvatarStyled,
@@ -29,7 +28,7 @@ export default function AuthCorner({ onOpen }: AuthCornerProps) {
       {isMobile ? (
         <BurgerBtnStyled className="btn" onClick={onOpen}>
           <svg width={28} height={28} fill="#f9f9f9">
-            <use href={`${sprite}#icon`}></use>
+            <use href="/sprite.svg#icon-burger-menu"></use>
           </svg>
         </BurgerBtnStyled>
       ) : (

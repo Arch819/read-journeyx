@@ -14,7 +14,7 @@ import {
 } from './Forms.styled';
 
 interface FormValues {
-  name: string;
+  name?: string;
   email: string;
   password: string;
 }
@@ -39,7 +39,11 @@ const validationSchema = object().shape({
   password: string().min(7).required(),
 });
 
-const initialValues: FormValues = {
+const initialSignInValues: FormValues = {
+  email: '',
+  password: '',
+};
+const initialSignUpValues: FormValues = {
   name: '',
   email: '',
   password: '',
@@ -47,17 +51,21 @@ const initialValues: FormValues = {
 
 export default function SignForm(props: SignFormProps) {
   const [isDisabledBtn, setIsDisabledBtn] = useState(true);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const formik = useFormik<FormValues>({
-    initialValues,
+    initialValues:
+      props.event === 'signIn' ? initialSignInValues : initialSignUpValues,
     validationSchema:
       props.event === 'signIn' ? validationSignInSchema : validationSchema,
     onSubmit: (values, { resetForm }: FormikHelpers<FormValues>) => {
       console.log(values);
       resetForm();
       setIsDisabledBtn(true);
+      setIsSubmitted(true);
     },
   });
+  console.log(formik.isSubmitting);
 
   useEffect(() => {
     if (
@@ -89,13 +97,14 @@ export default function SignForm(props: SignFormProps) {
               type="text"
               name="name"
               label="Name:"
-              value={formik.values.name}
+              value={formik.values.name || undefined}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               error={formik.touched.name && Boolean(formik.errors.name)}
               helperText={formik.touched.name && formik.errors.name}
               touched={formik.touched.name}
               autoFocus
+              isSubmitted={isSubmitted}
               required
             />
           )}
@@ -109,6 +118,7 @@ export default function SignForm(props: SignFormProps) {
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
             touched={formik.touched.email}
+            isSubmitted={isSubmitted}
             autoFocus
             required
           />
@@ -122,6 +132,7 @@ export default function SignForm(props: SignFormProps) {
             error={formik.touched.password && Boolean(formik.errors.password)}
             helperText={formik.touched.password && formik.errors.password}
             touched={formik.touched.password}
+            isSubmitted={isSubmitted}
             required
           />
         </InputBoxStyled>

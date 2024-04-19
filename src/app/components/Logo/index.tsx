@@ -1,8 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
-import sprite from '../../../img/sprite.svg';
 import { LogoLinkStyled } from './Logo.styled';
 
 type LogoProps = {
@@ -18,7 +16,7 @@ export default function Logo(props: LogoProps) {
         textShow={props.textShow}
       >
         <svg width={42} height={17} className="logo-icon">
-          <use href={`${sprite}#icon-logo`}></use>
+          <use href="/sprite.svg#icon-logo"></use>
         </svg>
         <span className="logo-text">read journey</span>
       </LogoLinkStyled>

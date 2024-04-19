@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import Image from 'next/image';
 
 export const InputBoxStyled = styled.div`
   position: relative;
@@ -75,12 +74,6 @@ export const StatusIconBoxStyled = styled.div`
 export const StatusIconStyled = styled.svg`
   width: 18px;
   height: 18px;
-  &.error {
-    background-color: #e90516;
-  }
-  &.correct {
-    background-color: #30b94d;
-  }
 `;
 
 export const HelperTextStyled = styled.p`
