@@ -19,6 +19,7 @@ export default function ProgramView(props: ProgramViewProps) {
           src="/mobile/iPhone15-mob.png"
           srcSet="/mobile/iPhone15-mob.png 1x, /mobile/iPhone15-mob2x.png 2x"
           alt="view of the program in the mobile version"
+          loading="lazy"
         />
       </picture>
     </ProgramViewBoxStyled>

@@ -12,6 +12,9 @@ import {
   InputBoxStyled,
   FormActionBoxStyled,
 } from './Forms.styled';
+import { useDispatch } from 'react-redux';
+import { signInThunk, signUpThunk } from '@/lib/auth/authThunk';
+import { useRouter } from 'next/navigation';
 
 interface FormValues {
   name?: string;
@@ -53,19 +56,29 @@ export default function SignForm(props: SignFormProps) {
   const [isDisabledBtn, setIsDisabledBtn] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const formik = useFormik<FormValues>({
     initialValues:
       props.event === 'signIn' ? initialSignInValues : initialSignUpValues,
     validationSchema:
       props.event === 'signIn' ? validationSignInSchema : validationSchema,
     onSubmit: (values, { resetForm }: FormikHelpers<FormValues>) => {
-      console.log(values);
-      resetForm();
-      setIsDisabledBtn(true);
-      setIsSubmitted(true);
+      dispatch(
+        props.event === 'signIn' ? signInThunk(values) : signUpThunk(values),
+      ).then((r) => {
+        if (r.error) {
+          return;
+        }
+
+        resetForm();
+        setIsDisabledBtn(true);
+        setIsSubmitted(true);
+        router.push('/recommended');
+      });
     },
   });
-  console.log(formik.isSubmitting);
 
   useEffect(() => {
     if (

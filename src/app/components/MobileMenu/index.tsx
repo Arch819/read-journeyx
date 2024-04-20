@@ -34,7 +34,9 @@ function MobileMenu({ open, onClose }: MobileMenuProps) {
     <MobileMenuBackdropStyled onClick={onClose}>
       <MobileMenuContainerStyled onClick={(e) => e.stopPropagation()}>
         <MobileMenuCloseStyled className="btn" onClick={onClose}>
-          x
+          <svg width={22} height={22}>
+            <use href="/sprite.svg#icon-x"></use>
+          </svg>
         </MobileMenuCloseStyled>
         <Navigation onClose={onClose} />
         <LogOutBtn />

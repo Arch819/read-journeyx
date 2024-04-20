@@ -1,4 +1,5 @@
 import './globals.css';
+import StoreProvider from './StoreProvider';
 
 export default function RootLayout({
   children,
@@ -11,8 +12,10 @@ export default function RootLayout({
         <title>Read Journey</title>
       </head>
       <body>
-        <div id="root">{children}</div>
-        <div id="portal"></div>
+        <StoreProvider>
+          <div id="root">{children}</div>
+          <div id="portal"></div>
+        </StoreProvider>
       </body>
     </html>
   );

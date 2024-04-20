@@ -1,9 +1,12 @@
 import styled from '@emotion/styled';
 
 export const FormWrapperStyled = styled.div`
+  display: flex;
+  flex-direction: column;
   padding: 20px 20px 40px;
+
   @media screen and (min-width: 768px) {
-    padding: 36px 167px 0px 64px;
+    padding: 36px 167px 214px 64px;
   }
   @media screen and (min-width: 1440px) {
     padding: 40px 64px;
@@ -39,11 +42,14 @@ export const FormTitleStyled = styled.h2`
 `;
 
 export const FormStyled = styled.form`
+  min-height: 210px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  justify-content: space-between;
 
   @media screen and (min-width: 768px) {
+    min-height: 312px;
     gap: 82px;
   }
 `;

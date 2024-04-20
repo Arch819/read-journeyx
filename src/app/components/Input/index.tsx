@@ -13,7 +13,7 @@ type InputStatusProps = 'empty' | 'correct' | 'error';
 type Props = {
   type: 'text' | 'number' | 'password' | 'email';
   name: string;
-  value: string | undefined;
+  value: string | number | undefined;
   onChange(event: React.ChangeEvent<HTMLInputElement>): void;
   label?: string;
   onBlur?(event: React.FocusEvent<HTMLInputElement>): void;

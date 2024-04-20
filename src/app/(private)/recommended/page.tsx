@@ -12,7 +12,7 @@ type RecommendedProps = {};
 function Recommended({}: RecommendedProps) {
   return (
     <PrivatePagesWrapper>
-      <Dashboard>
+      <Dashboard gapD="20px" gapT="32px" gapM="20px">
         <DashboardForm titleText="Filters:">
           <Filter />
         </DashboardForm>

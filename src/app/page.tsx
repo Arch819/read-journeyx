@@ -1,16 +1,16 @@
 'use client';
 
-import { toggleIsMobile } from '@/redux/appState/appStateSlice';
-import { selectIsLoggedIn } from '@/redux/auth/authSelectors';
+import { toggleIsMobile } from '@/lib/appState/appStateSlice';
+import { selectIsLoggedIn } from '@/lib/auth/authSelectors';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Home() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const router = useRouter();
 
-  const isLoggedIn = false;
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -20,17 +20,17 @@ export default function Home() {
     }
   }, [isLoggedIn, router]);
 
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     dispatch(toggleIsMobile(window.innerWidth < 768));
-  //   };
+  useEffect(() => {
+    const handleResize = () => {
+      dispatch(toggleIsMobile(window.innerWidth < 768));
+    };
 
-  //   window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize);
 
-  //   return () => {
-  //     window.removeEventListener('resize', handleResize);
-  //   };
-  // }, [dispatch]);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [dispatch]);
 
   return null;
 }

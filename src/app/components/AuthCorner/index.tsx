@@ -3,6 +3,7 @@
 import React from 'react';
 import getFirstLetter from '@/utils/getFirstLetter';
 import LogOutBtn from '../LogOutBtn';
+import { useSelector } from 'react-redux';
 
 import {
   AuthAvatarStyled,
@@ -11,12 +12,14 @@ import {
   AuthNameStyled,
   BurgerBtnStyled,
 } from './AuthCorner.styled';
+import { selectName } from '@/lib/auth/authSelectors';
+import { selectIsMobile } from '@/lib/appState/appStateSelectors';
 
 type AuthCornerProps = { onOpen(): void };
 
 export default function AuthCorner({ onOpen }: AuthCornerProps) {
-  const isMobile = true;
-  const name = 'Lara';
+  const isMobile = useSelector(selectIsMobile);
+  const name = useSelector(selectName);
   return (
     <AuthCornerBoxStyled>
       <AuthInfoStyled>

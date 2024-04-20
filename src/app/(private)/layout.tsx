@@ -14,7 +14,7 @@ type Props = {
 type PopUpProps = '' | 'detailBook' | 'successAddedBook' | 'bookIsRead';
 
 export default function Layout(props: Props) {
-  const [popUp, setPopUp] = useState<PopUpProps>('bookIsRead');
+  const [popUp, setPopUp] = useState<PopUpProps>('');
 
   const renderPopUp = () => {
     switch (popUp) {
@@ -32,7 +32,7 @@ export default function Layout(props: Props) {
   return (
     <>
       <Header />
-      <main>
+      <main className="private-main">
         <section>
           <div className="container">{props.children}</div>
         </section>

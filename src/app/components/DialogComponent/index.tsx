@@ -32,7 +32,9 @@ function DialogComponent({ popUp, open, onClose }: DialogComponentProps) {
       aria-describedby="alert-dialog-slide-description"
     >
       <DialogCloseBtn className="btn" onClick={onClose}>
-        X
+        <svg width={22} height={22}>
+          <use href="/sprite.svg#icon-x"></use>
+        </svg>
       </DialogCloseBtn>
       <DialogContentStyled>{popUp}</DialogContentStyled>
     </DialogStyled>
