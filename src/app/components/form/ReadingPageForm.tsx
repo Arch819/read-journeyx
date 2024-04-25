@@ -58,6 +58,7 @@ function ReadingPageForm({
         text={statusReading ? 'To stop' : 'To start'}
         onClick={changeStatus}
         style={{ marginTop: '20px' }}
+        type="submit"
       />
     </form>
   );

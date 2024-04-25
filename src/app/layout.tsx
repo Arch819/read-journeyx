@@ -1,5 +1,9 @@
+import dynamic from 'next/dynamic';
+import AppProvider from './AppProvider';
 import './globals.css';
-import StoreProvider from './StoreProvider';
+const StoreProvider = dynamic(() => import('../lib/StoreProvider'), {
+  ssr: false,
+});
 
 export default function RootLayout({
   children,
@@ -13,8 +17,10 @@ export default function RootLayout({
       </head>
       <body>
         <StoreProvider>
-          <div id="root">{children}</div>
-          <div id="portal"></div>
+          <AppProvider>
+            <div id="root">{children}</div>
+            <div id="portal"></div>
+          </AppProvider>
         </StoreProvider>
       </body>
     </html>

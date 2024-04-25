@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Formik, FormikHelpers, useFormik } from 'formik';
+import { FormikHelpers, useFormik } from 'formik';
 import { object, string } from 'yup';
 import Input from '../Input';
 import {
@@ -12,9 +12,10 @@ import {
   InputBoxStyled,
   FormActionBoxStyled,
 } from './Forms.styled';
-import { useDispatch } from 'react-redux';
 import { signInThunk, signUpThunk } from '@/lib/auth/authThunk';
 import { useRouter } from 'next/navigation';
+import { useAppDispatch } from '@/lib/hooks';
+import { notiflixMessage } from '@/utils/notiflixMessages';
 
 interface FormValues {
   name?: string;
@@ -52,26 +53,26 @@ const initialSignUpValues: FormValues = {
   password: '',
 };
 
-export default function SignForm(props: SignFormProps) {
+export default function SignForm({ event }: SignFormProps) {
   const [isDisabledBtn, setIsDisabledBtn] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   const formik = useFormik<FormValues>({
     initialValues:
-      props.event === 'signIn' ? initialSignInValues : initialSignUpValues,
+      event === 'signIn' ? initialSignInValues : initialSignUpValues,
     validationSchema:
-      props.event === 'signIn' ? validationSignInSchema : validationSchema,
+      event === 'signIn' ? validationSignInSchema : validationSchema,
     onSubmit: (values, { resetForm }: FormikHelpers<FormValues>) => {
       dispatch(
-        props.event === 'signIn' ? signInThunk(values) : signUpThunk(values),
-      ).then((r) => {
-        if (r.error) {
+        event === 'signIn' ? signInThunk(values) : signUpThunk(values),
+      ).then(({ meta, payload }) => {
+        if (meta.requestStatus === 'rejected') {
           return;
         }
-
+        notiflixMessage('ok', `Welcome, ${payload.name}`);
         resetForm();
         setIsDisabledBtn(true);
         setIsSubmitted(true);
@@ -105,7 +106,7 @@ export default function SignForm(props: SignFormProps) {
       </FormTitleStyled>
       <FormStyled onSubmit={formik.handleSubmit} autoFocus={true}>
         <InputBoxStyled>
-          {props.event === 'signUp' && (
+          {event === 'signUp' && (
             <Input
               type="text"
               name="name"
@@ -116,7 +117,6 @@ export default function SignForm(props: SignFormProps) {
               error={formik.touched.name && Boolean(formik.errors.name)}
               helperText={formik.touched.name && formik.errors.name}
               touched={formik.touched.name}
-              autoFocus
               isSubmitted={isSubmitted}
               required
             />
@@ -132,7 +132,6 @@ export default function SignForm(props: SignFormProps) {
             helperText={formik.touched.email && formik.errors.email}
             touched={formik.touched.email}
             isSubmitted={isSubmitted}
-            autoFocus
             required
           />
           <Input
@@ -150,7 +149,7 @@ export default function SignForm(props: SignFormProps) {
           />
         </InputBoxStyled>
         <FormActionBoxStyled>
-          {props.event === 'signIn' ? (
+          {event === 'signIn' ? (
             <>
               <FormActionSubmitBtnStyled
                 type="submit"

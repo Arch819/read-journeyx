@@ -1,36 +1,20 @@
 'use client';
 
-import { toggleIsMobile } from '@/lib/appState/appStateSlice';
+import React, { useEffect } from 'react';
 import { selectIsLoggedIn } from '@/lib/auth/authSelectors';
+import { useAppSelector } from '@/lib/hooks';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 export default function Home() {
-  const dispatch = useDispatch();
   const router = useRouter();
-
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
   useEffect(() => {
     if (isLoggedIn) {
-      router.push('/recommended');
+      router.push('/recommend');
     } else {
-      router.push('/sign-up');
+      router.push('sign-in');
     }
   }, [isLoggedIn, router]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      dispatch(toggleIsMobile(window.innerWidth < 768));
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [dispatch]);
 
   return null;
 }

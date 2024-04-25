@@ -1,25 +1,28 @@
 'use client';
 
-import { Select, SelectChangeEvent, colors } from '@mui/material';
+import { Select, SelectChangeEvent } from '@mui/material';
 import React, { useState } from 'react';
 import {
   MenuPropsStyled,
   SelectItemStyled,
   SelectStyled,
 } from './FilterStatusBook.styled';
+import { useAppDispatch } from '@/lib/hooks';
+import { changeFilter } from '@/lib/books/booksSlice';
 
+type StatusBookProps = 'unread' | 'in-progress' | 'done' | 'all';
 interface IStatusBook {
-  value: string;
+  value: StatusBookProps;
   label: string;
 }
+type FilterStatusBookProps = {};
 
 const statusBook: IStatusBook[] = [
   { value: 'unread', label: 'Unread' },
-  { value: 'inProgress', label: 'In progress' },
+  { value: 'in-progress', label: 'In progress' },
   { value: 'done', label: 'Done' },
   { value: 'all', label: 'All books' },
 ];
-type FilterStatusBookProps = {};
 
 const ChevronDownIcon = (props: any) => (
   <svg width={20} height={20} {...props}>
@@ -28,12 +31,15 @@ const ChevronDownIcon = (props: any) => (
 );
 
 function FilterStatusBook({}: FilterStatusBookProps) {
-  const [filterStatusBook, setFilterStatusBook] = useState('all');
+  const dispatch = useAppDispatch();
+  const [filterStatusBook, setFilterStatusBook] =
+    useState<StatusBookProps>('all');
 
   const isMobile = true;
 
   const handleChange = (event: SelectChangeEvent) => {
-    setFilterStatusBook(event.target.value as string);
+    setFilterStatusBook(event.target.value as StatusBookProps);
+    dispatch(changeFilter({ status: filterStatusBook }));
   };
   return (
     <div>

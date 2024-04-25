@@ -1,22 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import Input from '../Input';
 import SecondaryBtn from '../SecondaryBtn';
+import { changeFilter } from '@/lib/books/booksSlice';
+import { useAppDispatch, useAppSelector } from '@/lib/hooks';
+import { selectFilter } from '@/lib/books/booksSelectors';
 import { InputBoxStyled } from '../DashboardForm/DashboardForm.styled';
 
 type FilterProps = {};
-
-interface IInitialValues {
-  bookTitle: string;
-  author: string;
-}
-const initialValues: IInitialValues = {
-  bookTitle: '',
-  author: '',
-};
 
 const validationSchema = object().shape({
   bookTitle: string(),
@@ -24,48 +18,53 @@ const validationSchema = object().shape({
 });
 
 function Filter({}: FilterProps) {
+  const dispatch = useAppDispatch();
+  const filter = useAppSelector(selectFilter);
+
+  const [initialValues, setInitialValues] = useState(filter);
   const [isDisabledBtn, setIsDisabledBtn] = useState(true);
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      resetForm();
+    onSubmit: (values) => {
+      dispatch(changeFilter(values));
       setIsDisabledBtn(true);
-      setIsSubmitted(true);
     },
   });
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInitialValues((prev) => ({ ...prev, [name]: value }));
+    formik.handleChange(e);
+  };
+
   useEffect(() => {
-    if (formik.values.author || formik.values.bookTitle) {
+    if (formik.values.author || formik.values.title) {
       setIsDisabledBtn(false);
     }
-  }, [formik.values.author, formik.values.bookTitle]);
+  }, [formik.values.author, formik.values.title]);
 
   return (
     <form onSubmit={formik.handleSubmit}>
       <InputBoxStyled>
         <Input
           type="text"
-          name="bookTitle"
+          name="title"
           label="Book title:"
-          value={formik.values.bookTitle}
-          onChange={formik.handleChange}
+          value={formik.values.title}
+          onChange={handleChange}
           onBlur={formik.handleBlur}
-          isSubmitted={isSubmitted}
         />
         <Input
           type="text"
           name="author"
           label="The author:"
           value={formik.values.author}
-          onChange={formik.handleChange}
+          onChange={handleChange}
           onBlur={formik.handleBlur}
-          isSubmitted={isSubmitted}
         />
       </InputBoxStyled>
-      <SecondaryBtn text="To apply" disabled={isDisabledBtn} />
+      <SecondaryBtn text="To apply" type="submit" disabled={isDisabledBtn} />
     </form>
   );
 }

@@ -2,30 +2,35 @@
 
 import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import { object, string } from 'yup';
+import { number, object, string } from 'yup';
 import Input from '../Input';
 import SecondaryBtn from '../SecondaryBtn';
 import { InputBoxStyled } from '../DashboardForm/DashboardForm.styled';
+import { useAppDispatch } from '@/lib/hooks';
+import { addBookThunk } from '@/lib/books/booksThunk';
+import { togglePopUp } from '@/lib/appState/appStateSlice';
 
 type AddBookFormProps = {};
 
 interface IInitialValues {
-  bookTitle: string;
+  title: string;
   author: string;
-  numberPages: string;
+  totalPages: number;
 }
 const initialValues: IInitialValues = {
-  bookTitle: '',
+  title: '',
   author: '',
-  numberPages: '',
+  totalPages: 0,
 };
 const validationSchema = object().shape({
-  bookTitle: string().required(),
+  title: string().required(),
   author: string().required(),
-  numberPages: string().required(),
+  totalPages: number().required().min(1),
 });
 
 function AddBookForm({}: AddBookFormProps) {
+  const dispatch = useAppDispatch();
+
   const [isDisabledBtn, setIsDisabledBtn] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -33,7 +38,11 @@ function AddBookForm({}: AddBookFormProps) {
     initialValues,
     validationSchema,
     onSubmit: (values, { resetForm }) => {
-      console.log(values);
+      dispatch(addBookThunk(values)).then(
+        (r) =>
+          r.meta.requestStatus === 'fulfilled' &&
+          dispatch(togglePopUp('SuccessAddedBook')),
+      );
       resetForm();
       setIsDisabledBtn(true);
       setIsSubmitted(true);
@@ -43,8 +52,8 @@ function AddBookForm({}: AddBookFormProps) {
   useEffect(() => {
     if (
       (formik.touched.author ||
-        formik.touched.bookTitle ||
-        formik.touched.numberPages) &&
+        formik.touched.title ||
+        formik.touched.totalPages) &&
       !formik.isValidating &&
       !Object.keys(formik.errors).length
     ) {
@@ -54,8 +63,8 @@ function AddBookForm({}: AddBookFormProps) {
     formik.errors,
     formik.isValidating,
     formik.touched.author,
-    formik.touched.bookTitle,
-    formik.touched.numberPages,
+    formik.touched.title,
+    formik.touched.totalPages,
   ]);
 
   return (
@@ -64,13 +73,13 @@ function AddBookForm({}: AddBookFormProps) {
         <Input
           type="text"
           label="Book title:"
-          name="bookTitle"
-          value={formik.values.bookTitle}
+          name="title"
+          value={formik.values.title}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={formik.touched.bookTitle && Boolean(formik.errors.bookTitle)}
-          helperText={formik.touched.bookTitle && formik.errors.bookTitle}
-          touched={formik.touched.bookTitle}
+          error={formik.touched.title && Boolean(formik.errors.title)}
+          helperText={formik.touched.title && formik.errors.title}
+          touched={formik.touched.title}
           isSubmitted={isSubmitted}
           required
         />
@@ -88,22 +97,20 @@ function AddBookForm({}: AddBookFormProps) {
           required
         />
         <Input
-          type="text"
+          type="number"
           label="Number of pages:"
-          name="numberPages"
-          value={formik.values.numberPages}
+          name="totalPages"
+          value={formik.values.totalPages}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          error={
-            formik.touched.numberPages && Boolean(formik.errors.numberPages)
-          }
-          helperText={formik.touched.numberPages && formik.errors.numberPages}
-          touched={formik.touched.numberPages}
+          error={formik.touched.totalPages && Boolean(formik.errors.totalPages)}
+          helperText={formik.touched.totalPages && formik.errors.totalPages}
+          touched={formik.touched.totalPages}
           isSubmitted={isSubmitted}
           required
         />
       </InputBoxStyled>
-      <SecondaryBtn text="Add book" disabled={isDisabledBtn} />
+      <SecondaryBtn text="Add book" type="submit" disabled={isDisabledBtn} />
     </form>
   );
 }

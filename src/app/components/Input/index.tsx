@@ -15,6 +15,7 @@ type Props = {
   name: string;
   value: string | number | undefined;
   onChange(event: React.ChangeEvent<HTMLInputElement>): void;
+  defaultValue?: string | number | undefined;
   label?: string;
   onBlur?(event: React.FocusEvent<HTMLInputElement>): void;
   error?: boolean | undefined;
@@ -52,12 +53,13 @@ export default function Input(props: Props) {
 
   return (
     <InputBoxStyled style={props.sx} className={inputStatus}>
-      <LabelStyled>
+      <LabelStyled title={props.helperText || undefined}>
         <span className="label-text">{props.label}</span>
         <InputStyled
           type={showPassword ? 'text' : props.type}
           name={props.name}
           value={props.value}
+          defaultValue={props.defaultValue}
           onChange={props.onChange}
           onBlur={props.onBlur}
           required={props.required}

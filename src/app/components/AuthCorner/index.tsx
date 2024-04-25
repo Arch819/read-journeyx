@@ -4,7 +4,8 @@ import React from 'react';
 import getFirstLetter from '@/utils/getFirstLetter';
 import LogOutBtn from '../LogOutBtn';
 import { useSelector } from 'react-redux';
-
+import { selectName } from '@/lib/auth/authSelectors';
+import { selectDevice } from '@/lib/appState/appStateSelectors';
 import {
   AuthAvatarStyled,
   AuthCornerBoxStyled,
@@ -12,13 +13,11 @@ import {
   AuthNameStyled,
   BurgerBtnStyled,
 } from './AuthCorner.styled';
-import { selectName } from '@/lib/auth/authSelectors';
-import { selectIsMobile } from '@/lib/appState/appStateSelectors';
 
-type AuthCornerProps = { onOpen(): void };
+type AuthCornerProps = { onOpen: () => void };
 
 export default function AuthCorner({ onOpen }: AuthCornerProps) {
-  const isMobile = useSelector(selectIsMobile);
+  const device = useSelector(selectDevice);
   const name = useSelector(selectName);
   return (
     <AuthCornerBoxStyled>
@@ -28,7 +27,7 @@ export default function AuthCorner({ onOpen }: AuthCornerProps) {
         </AuthAvatarStyled>
         <AuthNameStyled>{name}</AuthNameStyled>
       </AuthInfoStyled>
-      {isMobile ? (
+      {device === 'mobile' ? (
         <BurgerBtnStyled className="btn" onClick={onOpen}>
           <svg width={28} height={28} fill="#f9f9f9">
             <use href="/sprite.svg#icon-burger-menu"></use>

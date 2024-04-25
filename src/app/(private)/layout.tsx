@@ -11,24 +11,7 @@ type Props = {
   children?: React.ReactNode;
 };
 
-type PopUpProps = '' | 'detailBook' | 'successAddedBook' | 'bookIsRead';
-
 export default function Layout(props: Props) {
-  const [popUp, setPopUp] = useState<PopUpProps>('');
-
-  const renderPopUp = () => {
-    switch (popUp) {
-      case 'detailBook':
-        return <DetailBook />;
-      case 'successAddedBook':
-        return <SuccessAddedBook />;
-      case 'bookIsRead':
-        return <BookIsRead />;
-      default:
-        return;
-    }
-  };
-
   return (
     <>
       <Header />
@@ -37,11 +20,6 @@ export default function Layout(props: Props) {
           <div className="container">{props.children}</div>
         </section>
       </main>
-      <DialogComponent
-        open={Boolean(popUp)}
-        onClose={() => setPopUp('')}
-        popUp={renderPopUp()}
-      ></DialogComponent>
     </>
   );
 }

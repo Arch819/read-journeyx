@@ -74,9 +74,16 @@ export const DesItemStyled = styled.li`
 `;
 
 export const AppDesLinkStyled = styled(Link)`
+  display: flex;
+  justify-content: space-between;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.28;
   color: var(--secondary-color);
   text-decoration: underline;
+  transition: color var(--transition);
+
+  &:is(:hover, :focus) {
+    color: var(--primary-color);
+  }
 `;

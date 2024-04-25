@@ -1,19 +1,17 @@
 export interface IAuthState {
-  profile: {
-    name: string;
-    email: string;
-  };
+  name: string;
+  email: string;
   token: string;
+  refreshToken: string;
   isLoggedIn: boolean;
   isRefreshing: boolean;
 }
 
 export const initialState: IAuthState = {
-  profile: {
-    name: '',
-    email: '',
-  },
+  name: '',
+  email: '',
   token: '',
+  refreshToken: '',
   isLoggedIn: false,
   isRefreshing: true,
 };

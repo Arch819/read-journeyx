@@ -19,6 +19,7 @@ export const SelectStyled = {
   },
 
   '.MuiSelect-icon': {
+    stroke: 'var(--primary-color)',
     right: '14px',
   },
 
@@ -37,7 +38,6 @@ export const SelectStyled = {
     },
   },
 };
-
 
 export function MenuPropsStyled(isMobile: boolean): Partial<MuiMenuProps> {
   return {

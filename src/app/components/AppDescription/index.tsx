@@ -32,7 +32,12 @@ function AppDescription({}: AppDescriptionProps) {
           </p>
         </DesItemStyled>
       </DesListStyled>
-      <AppDesLinkStyled href="/library">My library</AppDesLinkStyled>
+      <AppDesLinkStyled href="/library">
+        My library{' '}
+        <svg className="icon" width={24} height={24}>
+          <use href="/sprite.svg#icon-arrow-left"></use>
+        </svg>
+      </AppDesLinkStyled>
     </AppDesWrapperStyled>
   );
 }

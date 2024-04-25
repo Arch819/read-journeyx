@@ -72,6 +72,7 @@ export const StatusIconBoxStyled = styled.div`
 `;
 
 export const StatusIconStyled = styled.svg`
+  position: relative;
   width: 18px;
   height: 18px;
 `;

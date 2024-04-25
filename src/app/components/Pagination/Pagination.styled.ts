@@ -27,11 +27,17 @@ export const PaginationBtnStyled = styled.button`
     border-color: var(--primary-color);
   }
 
+  .icon {
+    stroke: var(--primary-color);
+  }
   .icon.left {
     transform: rotate(90deg);
   }
   .icon.right {
     transform: rotate(-90deg);
+  }
+  &:disabled .icon {
+    stroke: var(--secondary-color);
   }
 
   @media screen and (min-width: 768px) {

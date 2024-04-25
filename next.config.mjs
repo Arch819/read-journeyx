@@ -1,5 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: ['ftp.goit.study'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ftp.goit.study',
+        port: '',
+        pathname: '/img/readjourney/**',
+      },
+    ],
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
