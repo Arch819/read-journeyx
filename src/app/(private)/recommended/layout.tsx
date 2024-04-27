@@ -6,7 +6,7 @@ type LayoutProps = {
   dashboard: React.ReactNode;
 };
 
-function Layout({ children, modal, dashboard }: LayoutProps) {
+export default function Layout({ children, modal, dashboard }: LayoutProps) {
   return (
     <>
       {dashboard}
@@ -15,5 +15,3 @@ function Layout({ children, modal, dashboard }: LayoutProps) {
     </>
   );
 }
-
-export default Layout;
