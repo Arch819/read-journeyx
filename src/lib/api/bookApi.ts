@@ -72,13 +72,13 @@ interface IBookApi {
   //GET
   getRecommend: (params: QueryParamsProps) => Promise<IRecommendResponse>;
   getByOwn: (params: QueryParamsProps) => Promise<IReadBook[]>;
-  getById: (id: string) => Promise<IByIdResponse>;
+  getById: (id: string | undefined) => Promise<IByIdResponse>;
   //POST
   add: (bodyData: BookDataProps) => Promise<IReadBook>;
-  addById: (id: string) => Promise<IReadBook>;
+  addById: (id: string | undefined) => Promise<IReadBook>;
   readingStart: (bookData: IReadingBookData) => Promise<IReadBook>;
   readingFinish: (bookData: IReadingBookData) => Promise<IByIdResponse>;
-  removeById: (id: string) => Promise<IRemoveBookResponse>;
+  removeById: (id: string | undefined) => Promise<IRemoveBookResponse>;
   deleteReadingBook: (params: QueryParamsProps) => Promise<IByIdResponse>;
 }
 

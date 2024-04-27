@@ -14,33 +14,34 @@ const confirm = {
 
 Confirm.init({
   zindex: 9000,
-  backgroundColor: 'var(--bg-modal)',
+  backgroundColor: 'var(--bg-container)',
   backOverlayColor: 'rgba(0,0,0,0.7)',
   borderRadius: '12px',
   cssAnimationStyle: 'zoom',
-  titleColor: 'var(--color-text-primary)',
-  fontFamily: 'Manrope',
-  okButtonBackground: 'var(--bg-btn-positive)',
-  cancelButtonBackground: 'var(--bg-btn-negative)',
+  titleColor: 'var(--primary-color)',
+  messageColor: 'var(--secondary-color)',
+  fontFamily: 'Gilroy',
+  okButtonBackground: '#30B94D',
+  cancelButtonBackground: '#E90516',
 });
 Notify.init({
   borderRadius: '12px',
   clickToClose: true,
   zindex: 9000,
-  fontFamily: 'Roboto',
+  fontFamily: 'Gilroy',
   fontSize: '16px',
   cssAnimationStyle: 'from-right',
   fontAwesomeIconSize: '28px',
   success: {
-    background: '#3CBF61',
-    textColor: '#EFEDE8',
+    background: '#30B94D',
+    textColor: 'var(--primary-color)',
   },
   failure: {
-    background: '#E9101D',
-    textColor: '#EFEDE8',
+    background: '#E90516',
+    textColor: 'var(--primary-color)',
   },
   info: {
-    textColor: '#EFEDE8',
+    textColor: 'var(--primary-color)',
   },
 });
 

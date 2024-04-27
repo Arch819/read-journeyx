@@ -3,8 +3,6 @@ import client from '../api';
 import {
   BookDataProps,
   IByIdResponse,
-  // IByOwnResponse,
-  IId,
   IReadingBookData,
   IRecommendResponse,
   IRemoveBookResponse,
@@ -93,7 +91,7 @@ export const addBookThunk = createAsyncThunk<
 
 export const addBookByIdThunk = createAsyncThunk<
   IReadBook,
-  string,
+  string | undefined,
   {
     rejectValue: string;
   }

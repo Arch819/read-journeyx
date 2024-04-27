@@ -6,7 +6,9 @@ import { selectDetailBook } from '@/lib/books/booksSelectors';
 
 export interface PageProps {}
 
-export default function Page({}: PageProps) {
+function Page({}: PageProps) {
   const book = useAppSelector(selectDetailBook);
   return <BookItem book={book} />;
 }
+
+export default Page;

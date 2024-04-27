@@ -90,9 +90,15 @@ function AppProvider({ children }: AppProviderProps) {
 
   return (
     <>
-      {isLoading && <Loader />}
-      {children}
-      <DialogComponent />
+      {isRefreshing ? (
+        <Loader />
+      ) : (
+        <>
+          {isLoading && <Loader />}
+          {children}
+          <DialogComponent />
+        </>
+      )}
     </>
   );
 }

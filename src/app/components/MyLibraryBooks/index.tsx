@@ -31,7 +31,7 @@ function MyLibraryBooks({}: MyLibraryBooksProps) {
         <PageTitle>My library</PageTitle>
         <FilterStatusBook />
       </TopLineWrapper>
-      <BooksList books={books} />
+      <BooksList books={books} causedBy="library" />
     </LibraryWrapperStyled>
   );
 }

@@ -56,7 +56,7 @@ function RecommendedBooks({}: RecommendedBooksProps) {
         <PageTitle>Recommended</PageTitle>
         <Pagination totalPages={totalPages} currentPage={page} />
       </TopPageWrapper>
-      <BooksList books={books} />
+      <BooksList books={books} causedBy="recommended" />
     </RecommendedBooksWrapperStyled>
   );
 }

@@ -10,9 +10,9 @@ export default function Home() {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   useEffect(() => {
     if (isLoggedIn) {
-      router.push('/recommend');
+      router.push('/recommended');
     } else {
-      router.push('sign-in');
+      router.push('/sign-in');
     }
   }, [isLoggedIn, router]);
 

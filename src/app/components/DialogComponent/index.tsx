@@ -41,10 +41,9 @@ function renderPopUp(popUp: RenderPopUpProps) {
 function DialogComponent({ children, open, onClose }: DialogComponentProps) {
   const dispatch = useAppDispatch();
   const popUpSuccess = useAppSelector(selectPopUp);
-  console.log(popUpSuccess);
 
   function handleClose() {
-    children ? onClose : dispatch(togglePopUp(null));
+    onClose ? onClose() : dispatch(togglePopUp(null));
   }
 
   return (

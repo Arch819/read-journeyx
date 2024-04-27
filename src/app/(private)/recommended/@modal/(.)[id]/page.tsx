@@ -13,9 +13,9 @@ export default function Page({}: PageProps) {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  useEffect(() => {
-    dispatch(togglePopUp('DetailBook'));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(togglePopUp('DetailBook'));
+  // }, [dispatch]);
 
   return (
     <DialogComponent open={true} onClose={() => router.back()}>

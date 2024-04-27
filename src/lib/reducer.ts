@@ -9,6 +9,7 @@ const authPersistConfig = {
   storage,
   whitelist: ['token'],
 };
+
 const authPersistReducer = persistReducer(authPersistConfig, authReducer);
 
 export const reducer = {
