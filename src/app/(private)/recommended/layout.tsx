@@ -1,6 +1,6 @@
 import React from 'react';
 
-type LayoutProps = {
+export type LayoutProps = {
   children: React.ReactNode;
   modal: React.ReactNode;
   dashboard: React.ReactNode;
