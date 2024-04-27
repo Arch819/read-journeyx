@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface LayoutProps {
+type LayoutProps = {
   children: React.ReactNode;
   modal: React.ReactNode;
   dashboard: React.ReactNode;
-}
+};
 
 function Layout({ children, modal, dashboard }: LayoutProps) {
   return (
