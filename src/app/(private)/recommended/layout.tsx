@@ -1,3 +1,4 @@
+import PrivatePagesWrapper from '@/app/components/PrivatePagesWrapper';
 import React from 'react';
 
 export type LayoutProps = {
@@ -9,9 +10,11 @@ export type LayoutProps = {
 export default function Layout({ children, modal, dashboard }: LayoutProps) {
   return (
     <>
-      {dashboard}
       {modal}
-      {children}
+      <PrivatePagesWrapper>
+        {dashboard}
+        {children}
+      </PrivatePagesWrapper>
     </>
   );
 }
